@@ -9,6 +9,7 @@ int burst[], int wait[]) {
    wait[i] = burst[i-1] + wait[i-1] ;
    return 0;
 }
+
 // Function to calculate turn around time
 int turnAroundTime( int process[], int n,
 int burst[], int wait[], int turnAround[]) {
@@ -18,6 +19,7 @@ int burst[], int wait[], int turnAround[]) {
    turnAround[i] = burst[i] + wait[i];
    return 0;
 }
+
 //Function to calculate average time
 int avgTime( int process[], int n, int burst[]) {
    int wait[n], turnAround[n], totalWait = 0, totalTurnAround = 0;
@@ -44,8 +46,30 @@ int main() {
    //ID processes
    int process[] = { 1, 2, 3};
    int n = sizeof process / sizeof process[0];
-   //Burst time of all processes
+
+   //Burst times for the order P1, P2, P3
+   printf("First instance:\n");
    int burst[] = {5, 8, 12};
    avgTime(process, n, burst);
+   printf("\n");
+
+   //Burst times for the order P2, P3, P1
+   printf("Second instance:\n");
+   int burst2[] = {8, 12, 5};
+   avgTime(process, n, burst2);
+
    return 0;
 }
+
+/* 
+Observations:
+For the first instance of the test values, where the process with the shorter burst
+times are loaded first, the average waiting time and the
+average turn around time are both smaller than those of the second test instance,
+where the processes with longer burst times are executed before the one with the
+shorter burst time.
+
+Conclusion:
+It is more efficient to load the processes with shorter burst times before those
+with longer burst times.
+*/
